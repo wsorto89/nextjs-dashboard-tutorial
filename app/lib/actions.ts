@@ -122,13 +122,9 @@ export async function deleteInvoice(id: string) {
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
-    return {
-      message: "Database Error: Failed to Delete Invoice.",
-      error,
-    };
+    console.error("Database Error: Failed to Delete Invoice.", error);
   }
 
-  // Revalidate the cache for the invoices page and redirect the user.
+  // Revalidate the cache for the invoices page.
   revalidatePath(`/dashboard/invoices`);
-  redirect(`/dashboard/invoices`);
 }
